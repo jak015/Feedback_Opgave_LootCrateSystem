@@ -67,11 +67,8 @@ public class LootCrateSystem {
                 player.addCredits(extraCredits);
             }
 
-            if (crate.open(player)) {
-                System.out.println(player.getPlayerName() + " opened crate '" + crate.getCrateId() + "'!");
-            } else {
-                System.out.println(player.getPlayerName() + " does not have enough credits to open crate '" + crate.getCrateId() + "'.");
-            }
+            crate.open(player);
+            System.out.println(player.getPlayerName() + " opened crate '" + crate.getCrateId() + "'!");
         } catch (NotEnoughCreditsException | PlayerNotFoundException e) {
             System.out.println(e.getMessage());
         }
@@ -87,7 +84,7 @@ public class LootCrateSystem {
             player.addCredits(amount);
             System.out.println(player.getPlayerName() + " now has " + player.getCredits() + " credits.");
         } catch (NegativeAmountException | PlayerNotFoundException e) {
-            System.out.println("Cannot add negative amount of credits.");
+            System.out.println(e.getMessage());
         }
     }
 }
