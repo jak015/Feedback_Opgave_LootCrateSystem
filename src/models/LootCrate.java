@@ -21,7 +21,7 @@ public class LootCrate {
         return price;
     }
 
-    public boolean open(Player player) {
+    public boolean open(Player player) throws NotEnoughCreditsException {
         return player.useCredits(price);
     }
 }

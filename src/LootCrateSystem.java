@@ -59,12 +59,12 @@ public class LootCrateSystem {
         throw new PlayerNotFoundException("Player " + playerName + " not found.");
     }
 
-    private static void openCrate(String playerName, LootCrate crate, int credits, LootCrateSystem
+    private static void openCrate(String playerName, LootCrate crate, int extraCredits, LootCrateSystem
             system, ArrayList<Player> players) {
         try {
             Player player = system.findPlayer(playerName, players);
-            if (credits > 0) {
-                player.addCredits(credits);
+            if (extraCredits > 0) {
+                player.addCredits(extraCredits);
             }
 
             if (crate.open(player)) {
@@ -72,10 +72,8 @@ public class LootCrateSystem {
             } else {
                 System.out.println(player.getPlayerName() + " does not have enough credits to open crate '" + crate.getCrateId() + "'.");
             }
-        } catch (NotEnoughCreditsException e) {
-            System.out.println("Player does not have enough credits to open the loot crate.");
-        } catch (PlayerNotFoundException e) {
-            System.out.println("Player not found! try again.");
+        } catch (NotEnoughCreditsException | PlayerNotFoundException e) {
+            System.out.println(e.getMessage());
         }
     }
 
@@ -88,7 +86,7 @@ public class LootCrateSystem {
             sc.nextLine();
             player.addCredits(amount);
             System.out.println(player.getPlayerName() + " now has " + player.getCredits() + " credits.");
-        } catch (NegativeAmountException e) {
+        } catch (NegativeAmountException | PlayerNotFoundException e) {
             System.out.println("Cannot add negative amount of credits.");
         }
     }

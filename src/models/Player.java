@@ -1,5 +1,6 @@
 package models;
 import exceptions.NegativeAmountException;
+import exceptions.NotEnoughCreditsException;
 
 public class Player {
     private final String playerName;
@@ -25,16 +26,16 @@ public class Player {
         credits += amount;
     }
 
-    public boolean useCredits(int amount) {
+    public boolean useCredits(int amount) throws NotEnoughCreditsException {
         if (amount < 0) {throw new NegativeAmountException("Amount to use cannot be negative");}
-        if (credits < amount) return false;
+        if (credits < amount) throw new NotEnoughCreditsException(playerName + " does not have enough credits.");
         credits -= amount;
-        return true;
+        return false;
     }
 
     @Override
     public String toString() {
             return "Name: " + playerName + ", Credits: " + credits;
         }
-        }
+    }
 
