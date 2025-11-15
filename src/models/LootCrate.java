@@ -22,7 +22,6 @@ public class LootCrate {
     }
 
     public boolean open(Player player) {
-        if (player.getCredits() < price) {throw new NotEnoughCreditsException("Player does not have enough credits to open the loot crate.");}
         return player.useCredits(price);
     }
 }
