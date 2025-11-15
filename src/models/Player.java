@@ -12,10 +12,6 @@ public class Player {
         this.credits = 0;
     }
 
-    public void displayDetails() {
-        System.out.println(this);
-    }
-
     public String getPlayerName() {
         return playerName;
     }
@@ -30,11 +26,10 @@ public class Player {
     }
 
     public boolean useCredits(int amount) {
-        if (credits >= amount) {
-            credits -= amount;
-            return true;
-        } else
-            return false;
+        if (amount < 0) {throw new NegativeAmountException("Amount to use cannot be negative");}
+        if (credits < amount) return false;
+        credits -= amount;
+        return true;
     }
 
     @Override
