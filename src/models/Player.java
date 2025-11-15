@@ -26,11 +26,10 @@ public class Player {
         credits += amount;
     }
 
-    public boolean useCredits(int amount) throws NotEnoughCreditsException {
+    public void useCredits(int amount) throws NotEnoughCreditsException {
         if (amount < 0) {throw new NegativeAmountException("Amount to use cannot be negative");}
         if (credits < amount) throw new NotEnoughCreditsException(playerName + " does not have enough credits.");
         credits -= amount;
-        return false;
     }
 
     @Override
