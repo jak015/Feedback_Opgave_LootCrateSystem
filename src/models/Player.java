@@ -6,11 +6,11 @@ public class Player {
     private final String playerName;
     private int credits;
 
-    public Player(String playerName) {
+    public Player(String playerName, int credits) {
         if (playerName == null || playerName.isBlank()) {throw new IllegalArgumentException("Username cannot be blank"); }
 
         this.playerName = playerName;
-        this.credits = 0;
+        this.credits = credits;
     }
 
     public String getPlayerName() {
@@ -21,20 +21,14 @@ public class Player {
         return credits;
     }
 
-    public void addCredits(int amount) {
-        if (amount < 0) {throw new NegativeAmountException("Amount to add cannot be negative");}
-        credits += amount;
+    public void setCredits(int newCredits) {
+        this.credits = newCredits;
     }
 
-    public void useCredits(int amount) throws NotEnoughCreditsException {
-        if (amount < 0) {throw new NegativeAmountException("Amount to use cannot be negative");}
-        if (credits < amount) throw new NotEnoughCreditsException(playerName + " does not have enough credits.");
-        credits -= amount;
-    }
 
     @Override
     public String toString() {
-            return "Name: " + playerName + ", Credits: " + credits;
-        }
+        return "Name: " + playerName + ", Credits: " + credits;
     }
+}
 
